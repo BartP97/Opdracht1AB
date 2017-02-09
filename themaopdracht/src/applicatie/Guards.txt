@@ -1,0 +1,38 @@
+Klant Aanmaken:
+	Textfields:
+			Naam: [naam][spatie][achternaam] (GEEN CIJFERS)
+			Postcode:[4cijfers][2letters]
+			Straat:[straatnaam] (GEEN CIJFERS)
+			Huisnummer:[alleen cijfers]
+			Auto:[merk][spatie][type] (GEEN CIJFERS)
+			Kenteken:[cijfers/letters][-][cijfers/letters][-][cijfers/letters]
+
+			^^ ALS HIERAAN VOLDOET WERKT OPSLAAN PAS
+Klant aanpassen ^^
+
+Taken toevoegen:
+	Textfields:
+			Naam: [naam][spatie][achternaam] (GEEN CIJFERS)
+			Auto:[merk][spatie][type] (GEEN CIJFERS)
+			Kenteken:[cijfers/letters][-][cijfers/letters][-][cijfers/letters]
+			Probleem beschrijving: (Er mag geen 'Probleem Beschrijving' staan)
+
+			^^ ALS HIERAAN VOLDOET WERKT OPSLAAN PAS
+
+			Aantal: [alleen cijfers](OPTIONEEL)
+
+Taak wijzigen ^^
+
+Reservering aanmaken:	
+	Textfields:
+			Parkeeplek nummer: [nummer 1-50(aantal parkeerplekken)] (Geen STRING)
+
+Reservering wijzigen^^
+
+Factuur wijzigen:
+	Textfields:
+			Korting: [getal of komma getal] (Geen STRING)
+			Prijs onderdelen: [getal of komma getal] (Geen STRING)
+			Prijs Brandstof: [getal of komma getal] (Geen STRING)
+			Prijs Manuur: [getal of komma getal] (Geen STRING)
+			Repareer kosten:[getal of komma getal] (Geen STRING)
