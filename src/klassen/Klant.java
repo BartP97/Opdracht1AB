@@ -12,15 +12,15 @@ public class Klant implements Serializable {
 	private Factuur deFactuur;
 	private Auto deAuto;
 
-	public Klant(String nM, String pC, String str, String hN, LocalDate i,
-			String dA, String k) {
-		naam = nM;
-		postcode = pC;
-		straat = str;
-		huisnummer = hN;
+	public Klant(String naam, String postcode, String straat, String huisnr, LocalDate i,
+			String typeNaam, String kenteken) {
+		this.naam = naam;
+		this.postcode = postcode;
+		this.straat = straat;
+		this.huisnummer = huisnr;
 		geboorteDatum = i;
-		Auto a = new Auto(dA, k);
-		setAuto(a);
+		Auto auto = new Auto(typeNaam, kenteken);
+		setAuto(auto);
 	}
 
 	public Klant(String nm) {
@@ -80,9 +80,9 @@ public class Klant implements Serializable {
 
 	
 
-	public void setAuto(Auto qwer) {
+	public void setAuto(Auto auto) {
 		// TODO Auto-generated method stub
-		deAuto = qwer;
+		deAuto = auto;
 	}
 	
 	public void setFactuur(Factuur fact){

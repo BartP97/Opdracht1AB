@@ -46,8 +46,8 @@ public class FactuurController implements Serializable {
 		}
 		return a;
 	}
-	
-	public void nieuwFactuur(ComboBox<String> factuurding, String klantNaam, double kortingswa, double manuurswa, Calendar cal){
+	//eerst 'swa' don't pun?
+	public void nieuwFactuur(ComboBox<String> factuurding, String klantNaam, double korting, double manuur, Calendar cal){
 		boolean check = false;
 		for(Klant k : alleKlanten){
 			if(k.getNaam()==klantNaam){
@@ -57,7 +57,7 @@ public class FactuurController implements Serializable {
 					}
 				}
 				if(!check){
-					Factuur factuur = new Factuur(k, kortingswa, manuurswa, Calendar.getInstance());
+					Factuur factuur = new Factuur(k, korting, manuur, Calendar.getInstance());
 					k.setFactuur(factuur);
 					factuurding.getItems().addAll(factuur.getNaam());
 					alleFacturen.add(factuur);

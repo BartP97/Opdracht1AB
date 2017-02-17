@@ -28,7 +28,7 @@ public class TakenBord extends VBox implements Serializable{
 			return null;
 		}
 	}
-	public void verwijder(Taak t){
+	public void verwijderTaak(Taak t){
 		for(Label l : labels){
 			if(l.equals(t.getAuto().getKenteken() + "     -     "
 					+ t.getAuto().getType())){
@@ -43,15 +43,16 @@ public class TakenBord extends VBox implements Serializable{
 	}
 
 	
-	public void reset(){
-		for(Label l : labels){
-			try{
+	public void resetTakenbord() {
+		for (Label l : labels) {
+			try {
 				getChildren().remove(l);
-				
-			}catch(Exception e){
+
+			} catch (Exception e) {
 			}
 		}
 	}
+	//is een void met als methode naam 'geef' :/
 	public void geefTaken() {
 		if (alleTaken.size() == 0) {
 			
@@ -127,7 +128,7 @@ public class TakenBord extends VBox implements Serializable{
 					getChildren().remove(container);
 					geefTaken();
 				});
-				verwijder.setOnAction(event -> { // verwijder event
+				verwijder.setOnAction(event -> { // verwijderTaak event
 							alleTaken.remove(t);
 							getChildren().remove(container);
 							geefTaken();

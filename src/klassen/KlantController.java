@@ -16,6 +16,8 @@ public class KlantController implements Serializable {
 		alleKlanten = klanten;
 	}
 
+	/*
+	//OUD
 	public void klantToevoegen(ComboBox<String> klanten, String naam,
 			String postcode, String straat, String huisnummer,
 			LocalDate geboorteDatum, String autoType, String kenteken) {
@@ -25,7 +27,13 @@ public class KlantController implements Serializable {
 		klant.setAuto(auto);
 		klanten.getItems().addAll(klant.getNaam());
 		alleKlanten.add(klant);
-		}
+		}*/
+	//NIEUW: in de klasse klant wordt er al een auto aangemaakt en toegewezen. Functie is nu kleiner
+	//doordat in de view de klant wordt aangemaakt.
+	public void klantToevoegen(ComboBox<String> klanten, Klant klant) {
+		klanten.getItems().addAll(klant.getNaam());
+		alleKlanten.add(klant);
+	}
 
 	public void verwijderKlant(ComboBox<String> klantBox, String naam) {
 		Iterator<Klant> iter = alleKlanten.iterator();

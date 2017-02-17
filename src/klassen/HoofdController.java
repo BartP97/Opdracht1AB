@@ -83,10 +83,10 @@ public class HoofdController implements Serializable {
 		}
 
 	}
-	public void vulOnderdelen(ComboBox<String> x) {
+	public void vulOnderdelen(ComboBox<String> onderdelenBox) {
 		for (Onderdeel o : alleOnderdelen) {
-			x.getItems().remove(o.getNaam());
-			x.getItems().add(o.getNaam());
+			onderdelenBox.getItems().remove(o.getNaam());
+			onderdelenBox.getItems().add(o.getNaam());
 		}
 	}
 	public void vulBrandstof(ComboBox<String> cb) {
@@ -103,7 +103,9 @@ public class HoofdController implements Serializable {
 				autos.getItems().add(k.getAuto().getType());
 			}
 		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 		} catch (UnsupportedOperationException uoe) {
+			uoe.printStackTrace();
 		}
 	}
 
@@ -115,7 +117,9 @@ public class HoofdController implements Serializable {
 				reserveringen.getItems().add(r.getNaam());
 			}
 		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 		} catch (UnsupportedOperationException uoe) {
+			uoe.printStackTrace();
 		}
 	}
 

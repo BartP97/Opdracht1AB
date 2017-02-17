@@ -3,13 +3,8 @@ package applicatie;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -27,13 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import klassen.FactuurController;
-import klassen.HoofdController;
-import klassen.FileMaker;
-import klassen.KlantController;
-import klassen.TaakController;
-import klassen.TakenBord;
-import klassen.ReserveringController;
+import klassen.*;
 
 public class GUI extends Application implements Serializable {
 
@@ -76,7 +65,7 @@ public class GUI extends Application implements Serializable {
 	DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	Calendar cal = Calendar.getInstance();
 	FileMaker fm = new FileMaker();
-
+	private double textKort = 0, textBrand = 0, textOnd = 0, textMan = 0;
 	private HoofdController deController;
 	private TakenBord tb = new TakenBord();
 
@@ -431,7 +420,7 @@ public class GUI extends Application implements Serializable {
 		// Taken
 		taakOverzicht.setOnAction(event -> {
 			reset();
-			tb.reset();
+			tb.resetTakenbord();
 			veldRechts.setPadding(new Insets(0, 0, 0, 0));
 			veldRechts.getChildren().add(tb);
 			tb.setPrefSize(300, 400);
@@ -468,7 +457,7 @@ public class GUI extends Application implements Serializable {
 					&& !tfAutoType.getText().equals("")
 					&& !ta.getText().equals("")
 					&& !tfKenteken.getText().equals("")) {
-				tc.taakToevoegen(cbKlanten, cbTaken, tb, tfKlantNaam.getText(),
+				tc.toevoegenTaak(cbKlanten, cbTaken, tb, tfKlantNaam.getText(),
 						tfAutoType.getText(), ta.getText(),
 						tfKenteken.getText());
 			}
@@ -630,7 +619,7 @@ public class GUI extends Application implements Serializable {
 		});
 
 		wijzig1.setOnAction(event -> {
-			double b = 0, textKort = 0, textBrand = 0, textOnd = 0, textMan = 0;
+			double b = 0;
 			String a = cbFacturen.getValue();
 			if (tfKort.getText().matches("-?\\d+(\\.\\d+)?")
 					&& tfKort.getText() != null) {
@@ -639,14 +628,8 @@ public class GUI extends Application implements Serializable {
 			if (b != fc.korting) {
 				fc.factuurKorting(a, b);
 				tfKort.setText("" + fc.getKorting(a));
-				if (tfKort.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfManUur.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfBrand.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfOnd.getText().matches("-?\\d+(\\.\\d+)?")) {
-					textKort = Double.parseDouble(tfKort.getText());
-					textBrand = Double.parseDouble(tfBrand.getText());
-					textOnd = Double.parseDouble(tfOnd.getText());
-					textMan = Double.parseDouble(tfManUur.getText());
+				if (textMatchesRegEx()) {
+					changeTextfields();
 				}
 				try {
 					fm.slaMainOp(deController);
@@ -657,6 +640,7 @@ public class GUI extends Application implements Serializable {
 							+ fc.berekenTotaal(a, textKort, textBrand, textOnd,
 									textMan));
 					// vullen();
+					resetTextfields();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -664,7 +648,7 @@ public class GUI extends Application implements Serializable {
 		});
 
 		wijzig4.setOnAction(event -> {
-			double b = 0, textKort = 0, textBrand = 0, textOnd = 0, textMan = 0;
+			double b = 0;
 			String a = cbFacturen.getValue();
 			if (tfManUur.getText().matches("-?\\d+(\\.\\d+)?")
 					&& tfManUur.getText() != null) {
@@ -673,14 +657,8 @@ public class GUI extends Application implements Serializable {
 			if (b != fc.manUur) {
 				fc.setFactuurManUur(a, b);
 				tfManUur.setText("" + fc.factuurManUur(a));
-				if (tfKort.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfManUur.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfBrand.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfOnd.getText().matches("-?\\d+(\\.\\d+)?")) {
-					textKort = Double.parseDouble(tfKort.getText());
-					textBrand = Double.parseDouble(tfBrand.getText());
-					textOnd = Double.parseDouble(tfOnd.getText());
-					textMan = Double.parseDouble(tfManUur.getText());
+				if (textMatchesRegEx()) {
+					changeTextfields();
 				}
 				subTot2.setText("�"
 						+ fc.berekenSubTotaal(a, textKort, textBrand, textOnd,
@@ -688,6 +666,8 @@ public class GUI extends Application implements Serializable {
 				totaal2.setText("�"
 						+ fc.berekenTotaal(a, textKort, textBrand, textOnd,
 								textMan));
+			 resetTextfields();
+
 				try {
 					fm.slaMainOp(deController);
 					// vullen();
@@ -700,7 +680,6 @@ public class GUI extends Application implements Serializable {
 		});
 
 		cbFacturen.setOnAction(event -> {
-			double textKort = 0, textBrand = 0, textOnd = 0, textMan = 0;
 			String ding = cbFacturen.getValue();
 			if (fc.valideerFactuur(ding)) {
 				tfKort.setText("" + fc.korting);
@@ -708,14 +687,8 @@ public class GUI extends Application implements Serializable {
 				tfOnd.setText("" + fc.factuurOnd(ding));
 				tfBrand.setText("" + fc.factuurBrand(ding));
 				// 0,00�
-				if (tfKort.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfManUur.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfBrand.getText().matches("-?\\d+(\\.\\d+)?")
-						&& tfOnd.getText().matches("-?\\d+(\\.\\d+)?")) {
-					textKort = Double.parseDouble(tfKort.getText());
-					textBrand = Double.parseDouble(tfBrand.getText());
-					textOnd = Double.parseDouble(tfOnd.getText());
-					textMan = Double.parseDouble(tfManUur.getText());
+				if (textMatchesRegEx()) {
+					changeTextfields();
 				}
 				subTot2.setText("�"
 						+ fc.berekenSubTotaal(ding, textKort, textBrand,
@@ -723,6 +696,7 @@ public class GUI extends Application implements Serializable {
 				totaal2.setText("�"
 						+ fc.berekenTotaal(ding, textKort, textBrand, textOnd,
 								textMan));
+				resetTextfields();
 				try {
 					fm.slaMainOp(deController);
 				} catch (Exception e) {
@@ -748,12 +722,15 @@ public class GUI extends Application implements Serializable {
 				iae.printStackTrace();
 			}
 		});
+		//Opslaan button maakt nu gelijk een klant aan.
 		opslaan7.setOnAction(event -> {
 			if (tfKlantNaam.getText() != null) {
-				kc.klantToevoegen(cbKlanten, tfKlantNaam.getText(),
+				Klant klant = new Klant(tfKlantNaam.getText(),
 						tfPostcode.getText(), tfStraat.getText(),
 						tfHuisNr.getText(), gebDat.getValue(),
 						tfAutoType.getText(), tfKenteken.getText());
+
+				kc.klantToevoegen(cbKlanten, klant);
 				try {
 					fm.slaMainOp(deController);
 				} catch (Exception e) {
@@ -927,6 +904,27 @@ public class GUI extends Application implements Serializable {
 		primaryStage.show();
 
 	}
+
+	private void changeTextfields() {
+		textKort = Double.parseDouble(tfKort.getText());
+		textBrand = Double.parseDouble(tfBrand.getText());
+		textOnd = Double.parseDouble(tfOnd.getText());
+		textMan = Double.parseDouble(tfManUur.getText());
+	}
+	private void resetTextfields(){
+		textKort = 0;
+		textBrand = 0;
+		textOnd = 0;
+		textMan = 0;;
+	}
+
+	private boolean textMatchesRegEx() {
+		return tfKort.getText().matches("-?\\d+(\\.\\d+)?")
+                && tfManUur.getText().matches("-?\\d+(\\.\\d+)?")
+                && tfBrand.getText().matches("-?\\d+(\\.\\d+)?")
+                && tfOnd.getText().matches("-?\\d+(\\.\\d+)?");
+	}
+
 
 	public void reset() {
 		cbKlanten.setValue("Klanten");

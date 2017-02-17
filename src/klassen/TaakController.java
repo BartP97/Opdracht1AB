@@ -23,12 +23,12 @@ public class TaakController implements Serializable {
 		alleBrandstof = brandstof;
 	}
 
-	public void voegOnderdeelToe(Onderdeel o) {
-		alleOnderdelen.add(o);
+	public void voegOnderdeelToe(Onderdeel onderdeel) {
+		alleOnderdelen.add(onderdeel);
 	}
 
-	public void voegBrandstofToe(Brandstof b) {
-		alleBrandstof.add(b);
+	public void voegBrandstofToe(Brandstof brandstof) {
+		alleBrandstof.add(brandstof);
 	}
 
 	public boolean valideerTaak(String tTaak) {
@@ -46,21 +46,12 @@ public class TaakController implements Serializable {
 		}
 		return false;
 	}
-
-	public void taakToevoegen(ComboBox<String> klantenBox,
-			ComboBox<String> takenBox, TakenBord ta, String klantnaam,
-			String type, String beschrijving, String kenteken) {
+//Dont repeat yourself
+	public void toevoegenTaak(ComboBox<String> klantenBox,
+							  ComboBox<String> takenBox, TakenBord ta, String klantnaam,
+							  String type, String beschrijving, String kenteken) {
 		if (alleKlanten.isEmpty()) {
-			Klant klant = new Klant(klantnaam);
-			alleKlanten.add(klant);
-			klantenBox.getItems().add(klant.getNaam());
-			Auto auto = new Auto(type, kenteken);
-			klant.setAuto(auto);
-			Taak taak = new Taak(klant, auto, beschrijving);
-			tb = ta;
-			tb.voegTaakToe(taak);
-			takenBox.getItems().add(kenteken + " - " + type);
-			alleTaken.add(taak);
+			maakNieuweKlant(klantenBox, takenBox, ta, klantnaam, type, beschrijving, kenteken);
 		} else if (!alleKlanten.isEmpty()) {
 			
 			boolean checkKlant = false;
@@ -72,16 +63,7 @@ public class TaakController implements Serializable {
 				}
 			}
 				if (!checkKlant) {
-					Klant klant = new Klant(klantnaam);
-					alleKlanten.add(klant);
-					klantenBox.getItems().add(klant.getNaam());
-					Auto auto = new Auto(type, kenteken);
-					klant.setAuto(auto);
-					Taak taak = new Taak(klant, auto, beschrijving);
-					tb = ta;
-					tb.voegTaakToe(taak);
-					takenBox.getItems().add(kenteken + " - " + type);
-					alleTaken.add(taak);
+					maakNieuweKlant(klantenBox, takenBox, ta, klantnaam, type, beschrijving, kenteken);
 				} else {
 					Auto auto = new Auto(type, kenteken);
 					k.setAuto(auto);
@@ -91,10 +73,10 @@ public class TaakController implements Serializable {
 					takenBox.getItems().add(kenteken + " - " + type);
 					alleTaken.add(taak);
 				}
-			}
-		}
 
-	
+
+		}
+		}
 
 	public void wijzigBeschrijvingTaak(String taak, String beschrijving) {
 		for (Taak t : alleTaken) {
@@ -207,5 +189,19 @@ public class TaakController implements Serializable {
 			}
 		}
 		return false;
+	}
+	private void maakNieuweKlant(ComboBox<String> klantenBox,
+								 ComboBox<String> takenBox, TakenBord ta, String klantnaam,
+								 String type, String beschrijving, String kenteken) {
+		Klant klant = new Klant(klantnaam);
+		alleKlanten.add(klant);
+		klantenBox.getItems().add(klant.getNaam());
+		Auto auto = new Auto(type, kenteken);
+		klant.setAuto(auto);
+		Taak taak = new Taak(klant, auto, beschrijving);
+		tb = ta;
+		tb.voegTaakToe(taak);
+		takenBox.getItems().add(kenteken + " - " + type);
+		alleTaken.add(taak);
 	}
 }

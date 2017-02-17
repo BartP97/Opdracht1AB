@@ -27,15 +27,16 @@ public class FileMaker implements Serializable{
 	public HoofdController openMain() throws FileNotFoundException, IOException{
 		ObjectInputStream oin = new ObjectInputStream(new FileInputStream("controller.obj"));
 		Object o = null;
+		HoofdController a = null;
 		try {
 			o = oin.readObject();
+			if(o instanceof HoofdController){
+				a = (HoofdController)o;
+			}
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
 		}
-		HoofdController a = null;
-		if(o instanceof HoofdController){
-			a = (HoofdController)o;
-		}
+
 		oin.close();
 		return a;	
 	}
