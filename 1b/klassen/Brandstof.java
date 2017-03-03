@@ -12,9 +12,9 @@ public class Brandstof implements Serializable {
 		prijs = p;
 		aantalLiters = aL;
 	}
-    //Inline
+
 	public double getPrijs() {
-        return (Double) this.prijs * (Double) this.aantalLiters;
+		return prijs * aantalLiters;
 	}
 
 	public double getAantalLiters() {

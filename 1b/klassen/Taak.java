@@ -40,7 +40,9 @@ public class Taak implements Serializable {
 	}
 
 	public double getPrijsBrandstof() {
+
 		double brandstofPrijs = deBrandstof.getPrijs();
+
 		return brandstofPrijs;
 
 	}
@@ -48,7 +50,6 @@ public class Taak implements Serializable {
 	public Klant getKlant() {
 		return deKlant;
 	}
-
 
 	public Brandstof getBrandstof() {
 		return deBrandstof;

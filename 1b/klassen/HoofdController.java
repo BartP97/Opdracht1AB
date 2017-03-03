@@ -95,14 +95,12 @@ public class HoofdController implements Serializable {
 			cb.getItems().add(b.getNaam());
 		}
 	}
-
-	//extract constant/field/variable
+	
 	public void vulAutos(ComboBox<String> autos) { 
 		try {
 			for (Klant k : alleKlanten) {
-				String type = k.getAuto().getType();
-				autos.getItems().remove(type);
-				autos.getItems().add(type);
+				autos.getItems().remove(k.getAuto().getType());
+				autos.getItems().add(k.getAuto().getType());
 			}
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();

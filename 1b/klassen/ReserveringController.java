@@ -9,8 +9,7 @@ public class ReserveringController implements Serializable{
 	private ArrayList<Reservering> alleReserveringen;
 	private ArrayList<Klant> alleKlanten;
 	public String auto, parkplek, kenteken;
-	private String string;
-
+	
 	public ReserveringController(ArrayList<Reservering> reservering, ArrayList<Klant> klanten){
 		alleReserveringen = reservering;
 		alleKlanten = klanten; 
@@ -33,12 +32,11 @@ public class ReserveringController implements Serializable{
 		}
 		
 	}
-	//extract field
+	
 	public String getAuto(String klant){
 		for (Klant k : alleKlanten){
 			if (klant.equals(k.getNaam())){
-				string = k.getAuto().getType() + " - " + k.getAuto().getKenteken();
-				return string;
+				return k.getAuto().getType() + " - " + k.getAuto().getKenteken();
 			}
 		}
 		return "";
@@ -48,7 +46,7 @@ public class ReserveringController implements Serializable{
 		for (Reservering k : alleReserveringen) {
 			if (naam.equals(k.getNaam())) {
 				auto = getAuto(naam);
-				parkplek = "" + Reservering.getParkeerplek();
+				parkplek = "" + k.getParkeerplek();
 				return true;
 			}
 

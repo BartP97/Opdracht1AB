@@ -3,7 +3,7 @@ package klassen;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Klant extends Person implements Serializable  {
+public class Klant implements Serializable {
 	private String naam;
 	private String postcode;
 	private String straat;
@@ -19,13 +19,10 @@ public class Klant extends Person implements Serializable  {
 		this.straat = straat;
 		this.huisnummer = huisnr;
 		geboorteDatum = i;
-		Auto auto = new AutoBuilder().setTypeNaam(typeNaam).setKenteken(kenteken).createAuto();
+		Auto auto = new Auto(typeNaam, kenteken);
 		setAuto(auto);
 	}
-//Remove middleman
-	/*	public Auto Auto(){
-			return deAuto.getAuto();
-		}*/
+
 	public Klant(String nm) {
 		naam = nm;
 	}
@@ -81,11 +78,15 @@ public class Klant extends Person implements Serializable  {
 		this.huisnummer = huisnummer;
 	}
 
+	
+
 	public void setAuto(Auto auto) {
 		// TODO Auto-generated method stub
 		deAuto = auto;
 	}
+	
 	public void setFactuur(Factuur fact){
 		deFactuur = fact;
 	}
-	}
+
+}

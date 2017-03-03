@@ -31,17 +31,22 @@ public class TaakController implements Serializable {
 		alleBrandstof.add(brandstof);
 	}
 
-	public boolean valideerTaak(String Taak) {
-		boolean gevalideerd = false;
-		for (Taak taakUitLijst : alleTaken) {
-			String taakString = taakUitLijst.getKenteken() + " - " + taakUitLijst.getAuto().getType();
+	public boolean valideerTaak(String tTaak) {
+		for (Taak t : alleTaken) {
+			String taak = t.getKenteken() + " - " + t.getAuto().getType();
 
-			gevalideerd = new CompareTaak(Taak, gevalideerd, taakUitLijst, taakString).invoke();
+			if (tTaak.equals(taak)) {
+
+				naam = t.getKlant().getNaam();
+				auto = t.getAuto().getType();
+				kenteken = t.getKenteken();
+				beschrijving = t.getBeschrijving();
+				return true;
+			}
 		}
-		return gevalideerd;
+		return false;
 	}
-
-	//Dont repeat yourself
+//Dont repeat yourself
 	public void toevoegenTaak(ComboBox<String> klantenBox,
 							  ComboBox<String> takenBox, TakenBord ta, String klantnaam,
 							  String type, String beschrijving, String kenteken) {
@@ -60,7 +65,7 @@ public class TaakController implements Serializable {
 				if (!checkKlant) {
 					maakNieuweKlant(klantenBox, takenBox, ta, klantnaam, type, beschrijving, kenteken);
 				} else {
-					Auto auto = new AutoBuilder().setTypeNaam(type).setKenteken(kenteken).createAuto();
+					Auto auto = new Auto(type, kenteken);
 					k.setAuto(auto);
 					Taak taak = new Taak(k, auto, beschrijving);
 					tb = ta;
@@ -191,38 +196,12 @@ public class TaakController implements Serializable {
 		Klant klant = new Klant(klantnaam);
 		alleKlanten.add(klant);
 		klantenBox.getItems().add(klant.getNaam());
-		Auto auto = new AutoBuilder().setTypeNaam(type).setKenteken(kenteken).createAuto();
+		Auto auto = new Auto(type, kenteken);
 		klant.setAuto(auto);
 		Taak taak = new Taak(klant, auto, beschrijving);
 		tb = ta;
 		tb.voegTaakToe(taak);
 		takenBox.getItems().add(kenteken + " - " + type);
 		alleTaken.add(taak);
-	}
-//Extract method object
-	private class CompareTaak {
-		private String taak;
-		private boolean gevalideerd;
-		private Taak taakUitLijst;
-		private String taakString;
-
-		public CompareTaak(String Taak, boolean gevalideerd, Taak taakUitLijst, String taakString) {
-			taak = Taak;
-			this.gevalideerd = gevalideerd;
-			this.taakUitLijst = taakUitLijst;
-			this.taakString = taakString;
-		}
-
-		public boolean invoke() {
-			if (taak.equals(taakString)) {
-
-				naam = taakUitLijst.getKlant().getNaam();
-				auto = taakUitLijst.getAuto().getType();
-				kenteken = taakUitLijst.getKenteken();
-				beschrijving = taakUitLijst.getBeschrijving();
-				gevalideerd = true;
-			}
-			return gevalideerd;
-		}
 	}
 }

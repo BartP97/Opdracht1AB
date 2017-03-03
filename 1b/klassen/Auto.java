@@ -3,13 +3,12 @@ package klassen;
 import java.io.Serializable;
 
 public class Auto implements Serializable {
-	private String typeNaam, kenteken;
-	private Monteur monteur;
 
-	//Change Method Signature & Builder
-	public Auto(String typeNaam, String kenteken) {
-		this.typeNaam = typeNaam;
-		this.kenteken = kenteken;
+	private String typeNaam, kenteken;
+
+	public Auto(String aN, String kT) {
+		typeNaam = aN;
+		kenteken = kT;
 	}
 
 	public void setType(String type) {
@@ -31,8 +30,5 @@ public class Auto implements Serializable {
 	public String toString() {
 		String s = typeNaam + " " + kenteken;
 		return s;
-	}
-	public Auto getAuto(){
-	return monteur.getAuto();
 	}
 }

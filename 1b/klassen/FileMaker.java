@@ -12,10 +12,9 @@ import java.io.Serializable;
 
 
 
-public class FileMaker implements FileMakerInterface {
+public class FileMaker implements Serializable{
 	public FileMaker() {}
 	
-	@Override
 	public void slaMainOp(HoofdController a) throws IOException{
 		ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream("controller.obj"));
 		try{
@@ -25,8 +24,7 @@ public class FileMaker implements FileMakerInterface {
 		}
 		oout.close();
 	}
-	@Override
-	public HoofdController openMain() throws IOException{
+	public HoofdController openMain() throws FileNotFoundException, IOException{
 		ObjectInputStream oin = new ObjectInputStream(new FileInputStream("controller.obj"));
 		Object o = null;
 		HoofdController a = null;

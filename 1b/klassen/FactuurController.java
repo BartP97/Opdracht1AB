@@ -57,7 +57,7 @@ public class FactuurController implements Serializable {
 					}
 				}
 				if(!check){
-					Factuur factuur = Factuur.createFactuur(k, korting, manuur, Calendar.getInstance());
+					Factuur factuur = new Factuur(k, korting, manuur, Calendar.getInstance());
 					k.setFactuur(factuur);
 					factuurding.getItems().addAll(factuur.getNaam());
 					alleFacturen.add(factuur);
@@ -130,13 +130,12 @@ public class FactuurController implements Serializable {
 			}
 		}
 	}
-
-	//Extract Parameter Object, functie hierondr was zoals het eerst was.
-	public double berekenSubTotaal(String naam, CalculationValues calculationValues){
+	
+	public double berekenSubTotaal(String naam, double kort, double brand, double ond, double man){
 		double totaal = 0, roundOff = 0;
 		for(Factuur f : alleFacturen){
 			if(f.getNaam().equals(naam)){
-				totaal += (calculationValues.getMan() + calculationValues.getBrand() + calculationValues.getOnd() - calculationValues.getKort());
+				totaal += (man + brand + ond - kort);
 				roundOff = Math.round(totaal * 100.0) / 100.0;
 			}
 		}

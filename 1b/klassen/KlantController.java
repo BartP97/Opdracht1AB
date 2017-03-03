@@ -56,7 +56,7 @@ public class KlantController implements Serializable {
 				k.setStraat(straat);
 				k.setHuisnummer(huisNr);
 				k.setGeboorteDatum(gebDat);
-				Auto a = new AutoBuilder().setTypeNaam(auto).setKenteken(kent).createAuto();
+				Auto a = new Auto(auto, kent);
 				k.setAuto(a);
 				
 			}

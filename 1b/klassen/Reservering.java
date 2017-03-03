@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Reservering implements Serializable {
 	private String naam;
-	private static int parkSpot;
+	private int parkSpot;
 	
 	public Reservering(String klantNaam, int parkeerPlek){
 		naam = klantNaam;
@@ -14,8 +14,8 @@ public class Reservering implements Serializable {
 	public String getNaam(){
 		return naam;
 	}
-	//Make static
-	public static int getParkeerplek(){
+	
+	public int getParkeerplek(){
 		return parkSpot;
 	}
 	public void setParkeerplek(int parkeerPlek){

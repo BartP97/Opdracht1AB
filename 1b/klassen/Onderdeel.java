@@ -2,6 +2,7 @@ package klassen;
 
 import java.io.Serializable;
 
+
 public class Onderdeel implements Serializable{
 	private double prijs;
 	private int aantal;
@@ -9,7 +10,8 @@ public class Onderdeel implements Serializable{
 	
 	public Onderdeel(String nm,  double p, int aT){
 		 naam = nm;
-		 prijs= p;
+		 
+		prijs= p;
 		 aantal =aT;
 	}
 	public void setAantal(int i){

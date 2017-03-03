@@ -1,22 +1,28 @@
 package applicatie;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import klassen.*;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class GUI extends Application implements Serializable {
 
@@ -623,13 +629,13 @@ public class GUI extends Application implements Serializable {
 				fc.factuurKorting(a, b);
 				tfKort.setText("" + fc.getKorting(a));
 				if (textMatchesRegEx()) {
-					changeTextFields();
+					changeTextfields();
 				}
 				try {
 					fm.slaMainOp(deController);
 					subTot2.setText("�"
-							+ fc.berekenSubTotaal(a,
-							new CalculationValues(textKort, textBrand, textOnd, textMan)));
+							+ fc.berekenSubTotaal(a, textKort, textBrand,
+									textOnd, textMan));
 					totaal2.setText("�"
 							+ fc.berekenTotaal(a, textKort, textBrand, textOnd,
 									textMan));
@@ -652,11 +658,11 @@ public class GUI extends Application implements Serializable {
 				fc.setFactuurManUur(a, b);
 				tfManUur.setText("" + fc.factuurManUur(a));
 				if (textMatchesRegEx()) {
-					changeTextFields();
+					changeTextfields();
 				}
 				subTot2.setText("�"
-						+ fc.berekenSubTotaal(a,
-						new CalculationValues(textKort, textBrand, textOnd, textMan)));
+						+ fc.berekenSubTotaal(a, textKort, textBrand, textOnd,
+								textMan));
 				totaal2.setText("�"
 						+ fc.berekenTotaal(a, textKort, textBrand, textOnd,
 								textMan));
@@ -682,11 +688,11 @@ public class GUI extends Application implements Serializable {
 				tfBrand.setText("" + fc.factuurBrand(ding));
 				// 0,00�
 				if (textMatchesRegEx()) {
-					changeTextFields();
+					changeTextfields();
 				}
 				subTot2.setText("�"
-						+ fc.berekenSubTotaal(ding,
-						new CalculationValues(textKort, textBrand, textOnd, textMan)));
+						+ fc.berekenSubTotaal(ding, textKort, textBrand,
+								textOnd, textMan));
 				totaal2.setText("�"
 						+ fc.berekenTotaal(ding, textKort, textBrand, textOnd,
 								textMan));
@@ -898,20 +904,18 @@ public class GUI extends Application implements Serializable {
 		primaryStage.show();
 
 	}
-//Extract Method
-	private void changeTextFields() {
+
+	private void changeTextfields() {
 		textKort = Double.parseDouble(tfKort.getText());
 		textBrand = Double.parseDouble(tfBrand.getText());
 		textOnd = Double.parseDouble(tfOnd.getText());
 		textMan = Double.parseDouble(tfManUur.getText());
 	}
-
-
 	private void resetTextfields(){
 		textKort = 0;
 		textBrand = 0;
 		textOnd = 0;
-		textMan = 0;
+		textMan = 0;;
 	}
 
 	private boolean textMatchesRegEx() {
