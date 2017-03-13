@@ -27,28 +27,95 @@ import klassen.*;
 public class GUI extends Application implements Serializable {
 
 	private static final long serialVersionUID = -6311903929255397737L;
-	Button facturen, taken, klant, reservering; // MENU
-	Button maakFactuur, checkFactuur, wijzigFactuur, taakOverzicht,
-			voegTaakToe, wijzigTaak, klantToe, klantAanpassen,
-			klantVerwijderen, taakKlantVerwijderen, reserveringAanmaken,
-			reserveringWijzigen; // SIDEMENU
-	Button wijzig1, wijzig2, wijzig3, wijzig4, wijzig5; // OVERIG
+	Button facturen;
+	Button taken;
+	Button klant;
+	Button reservering; // MENU
 
-	Button opslaan1, opslaan2, opslaan3, opslaan4, opslaan5, opslaan6,
-			opslaan7, opslaan8, opslaan9, opslaan10, opslaan11; // OPSLAAN
+	Button maakFactuur;
+	Button checkFactuur;
+	Button wijzigFactuur;
+	Button taakOverzicht;
+	Button voegTaakToe;
+	Button wijzigTaak;
+	Button klantToe;
+	Button klantAanpassen;
+	Button klantVerwijderen;
+	Button taakKlantVerwijderen;
+	Button reserveringAanmaken;
+	Button reserveringWijzigen; // SIDEMENU
+
+	Button wijzig1;
+	Button wijzig2;
+	Button wijzig3;
+	Button wijzig4;
+	Button wijzig5; // OVERIG
+
+	Button opslaan1;
+	Button opslaan2;
+	Button opslaan3;
+	Button opslaan4;
+	Button opslaan5;
+	Button opslaan6;
+	Button opslaan7;
+	Button opslaan8;
+	Button opslaan9;
+	Button opslaan10;
+	Button opslaan11; // OPSLAAN
 																// BUTTTONS
 
-	TextField tankLiters, tfKlantNaam, tfAutoType, tfKenteken, onderdeelAantal;// voorTaken
-	TextField tfKort, tfOnd, tfBrand, tfManUur, tfRep; // Voor factuur
-	TextField tfPostcode, tfStraat, tfHuisNr; // Voor Klanten
-	TextField parkPlek, tfAuto, tfKlant;// voor Reservering
+	TextField tankLiters;
+	TextField tfKlantNaam;
+	TextField tfAutoType;
+	TextField tfKenteken;
+	TextField onderdeelAantal;// voorTaken
 
-	Label korting, prijsOnd, prijsBrand, prijsManUur, prijsRepair, naam, LOOL,
-			subTot1, subTot2, BTW1, BTW2, totaal1, totaal2, selectTaak;// Voor
+	TextField tfKort;
+	TextField tfOnd;
+	TextField tfBrand;
+	TextField tfManUur;
+	TextField tfRep; // Voor factuur
+
+	TextField tfPostcode;
+	TextField tfStraat;
+	TextField tfHuisNr; // Voor Klanten
+
+	TextField parkPlek;
+	TextField tfAuto;
+	TextField tfKlant;// voor Reservering
+
+	Label korting;
+	Label prijsOnd;
+	Label prijsBrand;
+	Label prijsManUur;
+	Label prijsRepair;
+	Label naam;
+	Label LOOL;
+	Label subTot1;
+	Label subTot2;
+	Label BTW1;
+	Label BTW2;
+	Label totaal1;
+	Label totaal2;
+	Label selectTaak;// Voor
 																		// factuur
-	Label labUur, labLiter, labDat, klantNaam, autoType, kenteken, onderdeel,
-			kiesTaak, verwijderInfoTaak, verwijderInfoKlant;// voor Taken
-	Label kPostcode, kStraat, kGebDat, kHuisNr, selectKlant; // Voor Klanten
+	Label labUur;
+	Label labLiter;
+	Label labDat;
+	Label klantNaam;
+	Label autoType;
+	Label kenteken;
+	Label onderdeel;
+	Label kiesTaak;
+	Label verwijderInfoTaak;
+	Label verwijderInfoKlant;// voor Taken
+
+	Label kPostcode;
+	Label kStraat;
+	Label kGebDat;
+	Label kHuisNr;
+	Label selectKlant; // Voor Klanten
+
 	Label datoem;// voor Reservering
 	//
 	String postCo, str, geboorteDat, huisNr;
