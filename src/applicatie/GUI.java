@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 public class GUI extends Application implements Serializable {
 
@@ -80,6 +81,7 @@ public class GUI extends Application implements Serializable {
 			deController.vulFacturen(cbFacturen);
 
 		} catch (IOException e) {
+			Logger.getGlobal().warning(e.getMessage());
 			deController = new HoofdController(tb);
 			deController.vulOnderdelen(cbOnderdeelToe);
 			deController.vulBrandstof(cbBrandstof);
@@ -422,6 +424,7 @@ public class GUI extends Application implements Serializable {
 			try {
 				fm.slaMainOp(deController);
 			} catch (Exception e) {
+				Logger.getGlobal().warning(e.getMessage());
 				e.printStackTrace();
 			}
 			// tc.verwijderTaak(tb, kenteken);
@@ -443,6 +446,7 @@ public class GUI extends Application implements Serializable {
 
 				veldRechts.getChildren().addAll(tankLiters, onderdeelAantal);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 				iae.printStackTrace();
 			}
 		});
@@ -458,6 +462,7 @@ public class GUI extends Application implements Serializable {
 			try {
 				fm.slaMainOp(deController);
 			} catch (Exception e) {
+				Logger.getGlobal().warning(e.getMessage());
 				e.printStackTrace();
 			}
 			resetFields();
@@ -476,6 +481,7 @@ public class GUI extends Application implements Serializable {
 				veldRechts.setPadding(new Insets(120, 5, 0, 0));
 				veldRechts.getChildren().addAll(tankLiters, onderdeelAantal);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 				iae.printStackTrace();
 			}
 
@@ -503,6 +509,7 @@ public class GUI extends Application implements Serializable {
 							onderdeelAantal.getText(), cbTaken.getValue());
 				}
 			} catch (NumberFormatException nfe) {
+				Logger.getGlobal().warning(nfe.getMessage());
 			}
 			tc.wijzigBeschrijvingTaak(cbTaken.getValue(), ta.getText());
 			tc.wijzigAuto(tfKlantNaam.getText(), tfAutoType.getText(),
@@ -517,6 +524,7 @@ public class GUI extends Application implements Serializable {
 							taken);
 					fm.slaMainOp(deController);
 				} catch (Exception eb) {
+					Logger.getGlobal().warning(eb.getMessage());
 				}
 			}
 			
@@ -542,6 +550,7 @@ public class GUI extends Application implements Serializable {
 				tfOnd.setDisable(true);
 				tfBrand.setDisable(true);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 			}
 		});
 
@@ -583,6 +592,7 @@ public class GUI extends Application implements Serializable {
 			try {
 				fm.slaMainOp(deController);
 			} catch (Exception e) {
+				Logger.getGlobal().warning(e.getMessage());
 				e.printStackTrace();
 			}
 			resetFields();
@@ -609,6 +619,7 @@ public class GUI extends Application implements Serializable {
 				wijzig2.setVisible(false);
 				wijzig3.setVisible(false);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 			}
 		});
 
@@ -636,6 +647,7 @@ public class GUI extends Application implements Serializable {
 					// vullen();
 					resetTextfields();
 				} catch (Exception e) {
+					Logger.getGlobal().warning(e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -666,6 +678,7 @@ public class GUI extends Application implements Serializable {
 					fm.slaMainOp(deController);
 					// vullen();
 				} catch (Exception e) {
+					Logger.getGlobal().warning(e.getMessage());
 					e.printStackTrace();
 				}
 
@@ -694,6 +707,7 @@ public class GUI extends Application implements Serializable {
 				try {
 					fm.slaMainOp(deController);
 				} catch (Exception e) {
+					Logger.getGlobal().warning(e.getMessage());
 					e.printStackTrace();
 				}
 
@@ -713,6 +727,7 @@ public class GUI extends Application implements Serializable {
 						tfStraat, tfHuisNr, gebDat, tfAutoType, tfKenteken);
 
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 				iae.printStackTrace();
 			}
 		});
@@ -728,6 +743,7 @@ public class GUI extends Application implements Serializable {
 				try {
 					fm.slaMainOp(deController);
 				} catch (Exception e) {
+					Logger.getGlobal().warning(e.getMessage());
 					e.printStackTrace();
 				}
 				resetFields();
@@ -744,6 +760,7 @@ public class GUI extends Application implements Serializable {
 				veldMidden.getChildren().addAll(tfKlantNaam, tfPostcode,
 						tfStraat, tfHuisNr, gebDat, tfAutoType, tfKenteken);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 			}
 		});
 
@@ -755,6 +772,7 @@ public class GUI extends Application implements Serializable {
 			try {
 				fm.slaMainOp(deController);
 			} catch (Exception e) {
+				Logger.getGlobal().warning(e.getMessage());
 				e.printStackTrace();
 			}
 			resetFields();
@@ -805,6 +823,7 @@ public class GUI extends Application implements Serializable {
 				VBox.setMargin(verwijderInfoKlant, new Insets(30, 0, 0, 30));
 				container.getChildren().add(verwijderInfoKlant);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 			}
 		});
 		taakKlantVerwijderen.setOnAction(e -> {
@@ -819,6 +838,7 @@ public class GUI extends Application implements Serializable {
 			try {
 				fm.slaMainOp(deController);
 			} catch (Exception e) {
+				Logger.getGlobal().warning(e.getMessage());
 				e.printStackTrace();
 			}
 		});
@@ -833,6 +853,7 @@ public class GUI extends Application implements Serializable {
 				veldLinks.getChildren().addAll(cbKlanten);
 				veldMidden.getChildren().addAll(parkPlek);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 				iae.printStackTrace();
 			}
 		});
@@ -843,8 +864,10 @@ public class GUI extends Application implements Serializable {
 				rc.voegReserveringToe(cbReservering, cbKlanten.getValue(), parkeerplek);
 				fm.slaMainOp(deController);
 			} catch (NumberFormatException nfe) {
+				Logger.getGlobal().warning(nfe.getMessage());
 				nfe.printStackTrace();
 			} catch (Exception we) {
+				Logger.getGlobal().warning(we.getMessage());
 			}
 			resetFields();
 		});
@@ -859,6 +882,7 @@ public class GUI extends Application implements Serializable {
 				veldMidden.getChildren().addAll(tfAuto);
 				veldRechts.getChildren().addAll(parkPlek);
 			} catch (IllegalArgumentException iae) {
+				Logger.getGlobal().warning(iae.getMessage());
 				iae.printStackTrace();
 			}
 		});
@@ -870,8 +894,10 @@ public class GUI extends Application implements Serializable {
 				parkPlek.setText(rc.parkplek);
 				fm.slaMainOp(deController);
 			} catch (NumberFormatException nfe) {
+				Logger.getGlobal().warning(nfe.getMessage());
 				nfe.printStackTrace();
 			}catch(Exception we){
+				Logger.getGlobal().warning(we.getMessage());
 				
 			}
 			resetFields();
